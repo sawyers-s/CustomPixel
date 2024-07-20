@@ -10,7 +10,8 @@
 // create global variables
 String[] lines; // create array to hold lines of text
 String fileName = "textfile.txt"; // name of text file
-PImage img; // image to get colors from
+PImage[] images; // create array to hold multiple images
+int currentImageIndex = 0;
 PFont[] fonts; // create array to hold different font sizes
 
 int margin = 0; // margin around text
@@ -33,9 +34,22 @@ void setup() {
   //textSize(16);
   //textAlign(LEFT, TOP);
 
-  // load image
-  img = loadImage("metgala.jpg");
-  img.resize(width, height);
+  // load images
+  images = new PImage[3];
+  images[0] = loadImage("metgala1.jpg");
+  images[1] = loadImage("metgala2.jpg");
+  images[2] = loadImage("metgala3.jpg");
+
+  // check if images are loaded correctly
+  for (int i = 0; i < images.length; i++) {
+    if (images[i] == null) {
+      println("Error: Failed to load image " + i);
+      noLoop();
+      return;
+    }
+    // resize images to match canvas size
+    images[i].resize(width, height);
+  }
 
   // load fonts with different sizes
   fonts = new PFont[fontSizes.length];
@@ -58,8 +72,9 @@ void setup() {
 }
 
 void draw() {
-  // clear canvas
+  // clear canvas and draw current image
   background(255);
+  //image(images[currentImageIndex], 0, 0);
 
   // set current text size and apply current font
   textFont(fonts[currentFontSizeIndex]);
@@ -108,7 +123,7 @@ void drawRepeatedText() {
       int imgY = (int) y;
       // check if text is in bounds of canvas
       if (imgX >= 0 && imgX < width && imgY >= 0 && imgY < height) {
-        int textColor = img.get(imgX, imgY);
+        int textColor = images[currentImageIndex].get(imgX, imgY);
         fill(textColor); // set text color to color of corresponding pixel
       } else {
         fill(0); // default color if out of bounds
@@ -152,8 +167,27 @@ void setFrameRateForCurrentSize() {
     frameDelay = 15;
   } else {
     frameRate(2);
-    frameDelay = 30;
+    frameDelay = 20;
   }
+}
+
+// handle mouse press to switch images
+void mousePressed() {
+  // move to next image
+  currentImageIndex++;
+  if (currentImageIndex >= images.length) {
+    currentImageIndex = 0; // loop back to first image
+  }
+
+  // reset text drawing process for new image
+  resetDrawingProcess();
+}
+
+void resetDrawingProcess() {
+  // reset any state or reinitialize variables if needed
+  currentFontSizeIndex = 0;
+  frameCounter = 0;
+  setFrameRateForCurrentSize();
 }
 
 // API code to gather article data and encode string search query into valid URL query
