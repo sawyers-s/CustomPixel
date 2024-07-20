@@ -8,6 +8,7 @@
 String[] lines; // Array to hold lines of text
 String fileName = "textfile.txt"; // Name of the text file
 PImage img; // Image to get colors from
+PFont[] fonts; // Array to hold different font sizes
 int margin = 0; // Margin around the text
 int x = margin; // X position for drawing text
 int y = margin; // Y position for drawing text
@@ -22,7 +23,6 @@ int frameCounter = 0; // Counter to track frame updates
 void setup() {
   size(1050, 700); // Set canvas size
   noStroke(); // Remove stroke from text
-  setFrameRateForCurrentSize(); // Set initial frame rate
   
   // API code to fetch and print article titles to load into "textfile.txt"
   //ArrayList<JSONObject> articles = fetchArticles(QUERY, LANGUAGE, SORT_BY, API_KEY, URL);
@@ -33,6 +33,12 @@ void setup() {
   // Load the image
   img = loadImage("metgala.jpg");
   img.resize(width, height); // Resize image to match canvas size
+  
+   // Load fonts with different sizes
+  fonts = new PFont[fontSizes.length];
+  for (int i = 0; i < fontSizes.length; i++) {
+    fonts[i] = createFont("OldStandardTT-Bold.ttf", fontSizes[i]); // Ensure "MyFont.ttf" is in the `data` folder
+  }
 
   // Load text from the file
   lines = loadStrings(fileName);
@@ -43,6 +49,9 @@ void setup() {
     noLoop(); // Stop draw loop if no text is loaded
     return;
   }
+  
+  // Set the initial font size and frame rate
+  setFrameRateForCurrentSize();
 }
 
 void draw() {
@@ -50,6 +59,7 @@ void draw() {
   background(255);
 
   // Set the current text size
+  textFont(fonts[currentFontSizeIndex]); // Apply the current font
   float textSizeValue = fontSizes[currentFontSizeIndex];
   textSize(textSizeValue);
   lineHeight = (int) textAscent() + (int) textDescent(); // Update lineHeight with new text size
@@ -116,14 +126,14 @@ void setFrameRateForCurrentSize() {
   // Set frame rate based on current font size
   float size = fontSizes[currentFontSizeIndex];
   if (size <= 2) {
-    frameRate(1000000); // Fast frame rate for smallest sizes
+    frameRate(100000); // Fast frame rate for smallest sizes
     frameDelay = 5; // Minimum frame delay
   } else if (size <= 3) {
-    frameRate(1000000); // Fast frame rate for smallest sizes
-    frameDelay = 4; // Minimum frame delay
+    frameRate(1); // Fast frame rate for smallest sizes
+    frameDelay = 35; // Minimum frame delay
   } else if (size <= 5) {
-    frameRate(200); // Fast frame rate for smallest sizes
-    frameDelay = 20; // Minimum frame delay
+    frameRate(5); // Fast frame rate for smallest sizes
+    frameDelay = 25; // Minimum frame delay
   } else if (size <= 10) {
     frameRate(7); // Medium frame rate for small sizes
     frameDelay = 35; // Slightly longer frame delay
