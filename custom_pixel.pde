@@ -74,7 +74,6 @@ void setup() {
 void draw() {
   // clear canvas and draw current image
   background(255);
-  //image(images[currentImageIndex], 0, 0);
 
   // set current text size and apply current font
   textFont(fonts[currentFontSizeIndex]);
