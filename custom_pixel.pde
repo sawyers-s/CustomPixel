@@ -1,3 +1,10 @@
+// API key used to fetch headlines:
+//String URL = "https://newsapi.org/v2/everything";
+//String API_KEY = "d3c9d7d72f264f458784917e2f889029";
+//String QUERY = "fast fashion"; // Also used: "textile waste", "ethical fashion", "unsustainable fashion", "textile", "child labor", "sweat shop", "fashion supply chain", "greenwashing", "microplastics", "Shein", "Primark", "H&M", "Forever 21"
+//String LANGUAGE = "en";  // Specify English
+//String SORT_BY = "popularity";  // Sort by popularity
+
 String[] lines; // Array to hold lines of text
 String fileName = "textfile.txt"; // Name of the text file
 PImage img; // Image to get colors from
@@ -16,6 +23,12 @@ void setup() {
   size(1050, 700); // Set canvas size
   noStroke(); // Remove stroke from text
   setFrameRateForCurrentSize(); // Set initial frame rate
+  
+  // API code to fetch and print article titles to load into "textfile.txt"
+  //ArrayList<JSONObject> articles = fetchArticles(QUERY, LANGUAGE, SORT_BY, API_KEY, URL);
+  //fill(0); // Set text color to black
+  //textSize(16); // Set text size
+  //textAlign(LEFT, TOP); // Set text alignment
 
   // Load the image
   img = loadImage("metgala.jpg");
@@ -130,3 +143,50 @@ void setFrameRateForCurrentSize() {
     frameDelay = 30; // Longest frame delay
   }
 }
+
+// API code to gather article data and encode string search query into valid URL query
+//ArrayList<JSONObject> fetchArticles(String query, String language, String sortBy, String apiKey, String url) {
+//  // Construct the full URL with the language and sortBy parameters
+//  String requestUrl = url + "?q=" + encodeURL(query) + "&language=" + language + "&sortBy=" + sortBy + "&apiKey=" + apiKey;
+//  println("Request URL: " + requestUrl);
+
+//  // Load the JSON response
+//  JSONObject json = loadJSONObject(requestUrl);
+
+//  // Check if the response is valid
+//  if (json == null) {
+//    println("Error: Failed to fetch data");
+//    return new ArrayList<JSONObject>();
+//  }
+
+//  // Check if the response contains any articles
+//  if (!json.hasKey("articles")) {
+//    println("Error: No articles key in response");
+//    println(json.toString());
+//    return new ArrayList<JSONObject>();
+//  }
+
+//  // Extract the articles array
+//  JSONArray articlesArray = json.getJSONArray("articles");
+
+//  // Create an ArrayList to store the articles
+//  ArrayList<JSONObject> articles = new ArrayList<JSONObject>();
+
+//  // Loop through the articles and add them to the ArrayList
+//  for (int i = 0; i < articlesArray.size(); i++) {
+//    JSONObject article = articlesArray.getJSONObject(i);
+//    articles.add(article);
+//  }
+
+//  return articles;
+//}
+
+//// Utility function to URL-encode query parameters
+//String encodeURL(String s) {
+//  try {
+//    return java.net.URLEncoder.encode(s, "UTF-8");
+//  } catch (java.io.UnsupportedEncodingException e) {
+//    e.printStackTrace();
+//    return s;
+//  }
+//}
