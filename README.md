@@ -1,13 +1,13 @@
 ## Welcome!
-This is the repository for the ARTG2260 Custom Pixel project.
+This is the repository for the ARTG2260 Custom Pixel project, completed in Vienna, Austria as part of a Dialogue of Civilizations program at Northeastern University.
 
 ### Setup
-Be sure you have the .pde Processing file titled "custom_pixel.pde" for this project. Additionally, make sure your "data" folder contains five files:
-1. metgala1.jpg
-2. metgala2.jpg
-3. metgala3.jpg
-4. textfile.txt
-5. OldStandardTT-Bold.ttf
+Be sure you have the .pde Processing file titled `custom_pixel.pde` for this project. Additionally, make sure your `data` folder contains five files:
+1. `metgala1.jpg`
+2. `metgala2.jpg`
+3. `metgala3.jpg`
+4. `textfile.txt`
+5. `OldStandardTT-Bold.ttf`
 
 Note: All files for this project should be in the same directory/folder for the program to run successfully.
 
@@ -25,3 +25,5 @@ Goals:
 * To explore the relationship between an image and its component parts
 
 "
+
+## Thank you!
